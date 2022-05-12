@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cross word Puzzel</title>
+    <title>Palavras Cruzadas</title>
     <style>
       #cross {
         text-align: center;
@@ -70,7 +70,7 @@
             <input
               class="butt"
               type="submit"
-              value="Clear All"
+              value="Limpar"
               onclick="clearAllClicked()"
             />
           </td>
@@ -78,7 +78,7 @@
             <input
               class="butt"
               type="submit"
-              value="Check"
+              value="Checar"
               onclick="checkClicked()"
             />
           </td>
@@ -86,7 +86,7 @@
             <input
               class="butt"
               type="submit"
-              value="Solve"
+              value="Resolver"
               onclick="solveClicked()"
             />
           </td>
@@ -94,7 +94,7 @@
             <input
               class="butt"
               type="submit"
-              value="Clue"
+              value="Cola"
               onclick="clueClicked()"
             />
           </td>
@@ -207,7 +207,7 @@
             if (selectedInputTextElement.value != puzzelArrayData[i][j]) {
               selectedInputTextElement.style.backgroundColor = "red";
             } else {
-              selectedInputTextElement.style.backgroundColor = "white";
+              selectedInputTextElement.style.backgroundColor = "#5DFF00";
             }
           }
         }
