@@ -52,10 +52,16 @@
         text-align: center;
         font-size: larger;
       }
-      #hintsTable {
-        width: 480px;
-        float: left;
-        clear: left;
+      #hintsDiv {
+        display: flex;
+        justify-content: flex-start;
+      }
+      li {
+        cursor: pointer;
+        font-size: larger;
+      }
+      li:hover {
+        text-decoration: underline;
       }
     </style>
   </head>
@@ -101,167 +107,340 @@
         </tr>
       </table>
     </div>
-    <table id="hintsTable">
-      <tr>
-        <td><strong>Horizontal:</strong></td>
-        <td><strong>Vertical:</strong></td>
-      </tr>
-      <tr>
-        <td>3. Cultural Hub (Hyderabad)</td>
-        <td>1. Education Hub (Pune)</td>
-      </tr>
-      <tr>
-        <td>5. India's financial capital (Mumbai)</td>
-        <td>2. Information Technology Hub (Bangalore)</td>
-      </tr>
-      <tr>
-        <td>6. Saffron region (Kashmir)</td>
-        <td>4. Capital of India (Delhi)</td>
-      </tr>
-    </table>
+    <div id="hintsDiv">
+      <div id="vertical">
+        <h2>Vertical</h2>
+        <ul>
+          <li onclick="palavra1()">1. Quadcore</li>
+          <li onclick="palavra3()">3. Registradores</li>
+          <li onclick="palavra6()">6. CS</li>
+          <li onclick="palavra8()">8. Databus</li>
+          <li onclick="palavra10()">10. i7</li>
+          <li onclick="palavra11()">11. DMA</li>
+          <li onclick="palavra13()">13. Flash</li>
+          <li onclick="palavra15()">15. ROM</li>
+          <li onclick="palavra16()">16. ULA</li>
+        </ul>
+      </div>
+      <div id="horizontal">
+        <h2>Horizontal</h2>
+        <ul>
+          <li onclick="palavra2()">2. Eprom</li>
+          <li onclick="palavra4()">4. CPU</li>
+          <li onclick="palavra5()">5. Dualcore</li>
+          <li onclick="palavra7()">7. i5</li>
+          <li onclick="palavra9()">9. memoriademassa</li>
+          <li onclick="palavra12()">12. RAM</li>
+          <li onclick="palavra14()">14. Adressbus</li>
+        </ul>
+      </div>
+    </div>
   </body>
 </html>
 <script>
-    //Globals
-    var currentTextInput;
-    var puzzelArrayData;
-    //Loads the Crossword
-    function initializeScreen() {
-      var puzzelTable = document.getElementById("puzzel");
-      puzzelArrayData = preparePuzzelArray();
-      for (var i = 0; i < puzzelArrayData.length; i++) {
-        var row = puzzelTable.insertRow(-1);
-        var rowData = puzzelArrayData[i];
-        for (var j = 0; j < rowData.length; j++) {
-          var cell = row.insertCell(-1);
-          if (rowData[j] != 0) {
-            var txtID = String("txt" + "_" + i + "_" + j);
-            cell.innerHTML =
-              '<input type="text" class="inputBox" maxlength="1" style="text-transform: lowercase" ' +
-              'id="' +
-              txtID +
-              '" onfocus="textInputFocus(' +
-              "'" +
-              txtID +
-              "'" +
-              ')">';
+  //Globals
+  var currentTextInput;
+  var puzzelArrayData;
+  //Loads the Crossword
+  function initializeScreen() {
+    var puzzelTable = document.getElementById("puzzel");
+    puzzelArrayData = preparePuzzelArray();
+    for (var i = 0; i < puzzelArrayData.length; i++) {
+      var row = puzzelTable.insertRow(-1);
+      var rowData = puzzelArrayData[i];
+      for (var j = 0; j < rowData.length; j++) {
+        var cell = row.insertCell(-1);
+        if (rowData[j] != 0) {
+          var txtID = String("txt" + "_" + i + "_" + j);
+          cell.innerHTML =
+            '<input type="text" class="inputBox" maxlength="1" style="text-transform: lowercase" ' +
+            'id="' +
+            txtID +
+            '" onfocus="textInputFocus(' +
+            "'" +
+            txtID +
+            "'" +
+            ')">';
+        } else {
+          cell.style.backgroundColor = "black";
+        }
+      }
+    }
+    addHint();
+  }
+  //Adds the hint numbers
+  function addHint() {
+    document.getElementById("txt_0_2").placeholder = "1";
+    document.getElementById("txt_0_9").placeholder = "2";
+    document.getElementById("txt_0_11").placeholder = "3";
+    document.getElementById("txt_1_0").placeholder = "4";
+    document.getElementById("txt_3_2").placeholder = "5";
+    document.getElementById("txt_3_6").placeholder = "6";
+    document.getElementById("txt_3_11").placeholder = "7";
+    document.getElementById("txt_6_14").placeholder = "8";
+    document.getElementById("txt_7_1").placeholder = "9";
+    document.getElementById("txt_7_6").placeholder = "10";
+    document.getElementById("txt_7_8").placeholder = "11";
+    document.getElementById("txt_9_13").placeholder = "12";
+    document.getElementById("txt_10_6").placeholder = "13";
+    document.getElementById("txt_12_6").placeholder = "14";
+    document.getElementById("txt_12_8").placeholder = "15";
+    document.getElementById("txt_12_13").placeholder = "16";
+  }
+  //Stores ID of the selected cell into currentTextInput
+  function textInputFocus(txtID123) {
+    currentTextInput = txtID123;
+  }
+  //Returns Array
+  function preparePuzzelArray() {
+    var items = [
+      [0, 0, "q", 0, 0, 0, 0, 0, 0, "e", "p", "r", "o", "m", 0, 0],
+      ["c", "p", "u", 0, 0, 0, 0, 0, 0, 0, 0, "e", 0, 0, 0, 0],
+      [0, 0, "a", 0, 0, 0, 0, 0, 0, 0, 0, "g", 0, 0, 0, 0],
+      [0, 0, "d", "u", "a", "l", "c", "o", "r", "e", 0, "i", "5", 0, 0, 0],
+      [0, 0, "c", 0, 0, 0, "s", 0, 0, 0, 0, "s", 0, 0, 0, 0],
+      [0, 0, "o", 0, 0, 0, 0, 0, 0, 0, 0, "t", 0, 0, 0, 0],
+      [0, 0, "r", 0, 0, 0, 0, 0, 0, 0, 0, "r", 0, 0, "d", 0],
+      [0, "m", "e","m", "o", "r", "i", "a", "d", "e", "m", "a", "s", "s", "a", 0,],
+      [0, 0, 0, 0, 0, 0, "7", 0, "m", 0, 0, "d", 0, 0, "t", 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, "a", 0, 0, "o", 0, "r", "a", "m"],
+      [0, 0, 0, 0, 0, 0, "f", 0, 0, 0, 0, "r", 0, 0, "b", 0],
+      [0, 0, 0, 0, 0, 0, "l", 0, 0, 0, 0, "e", 0, 0, "u", 0],
+      [0, 0, 0, 0, 0, 0, "a", "d", "r", "e", "s", "s", "b", "u", "s", 0],
+      [0, 0, 0, 0, 0, 0, "s", 0, "o", 0, 0, 0, 0, "l", 0, 0],
+      [0, 0, 0, 0, 0, 0, "h", 0, "m", 0, 0, 0, 0, "a", 0, 0],
+    ];
+    return items;
+  }
+  //Clear All Button
+  function clearAllClicked() {
+    currentTextInput = "";
+    var puzzelTable = document.getElementById("puzzel");
+    puzzelTable.innerHTML = "";
+    initializeScreen();
+  }
+  //Check button
+  function checkClicked() {
+    for (var i = 0; i < puzzelArrayData.length; i++) {
+      var rowData = puzzelArrayData[i];
+      for (var j = 0; j < rowData.length; j++) {
+        if (rowData[j] != 0) {
+          var selectedInputTextElement = document.getElementById(
+            "txt" + "_" + i + "_" + j
+          );
+          if (selectedInputTextElement.value != puzzelArrayData[i][j]) {
+            selectedInputTextElement.style.backgroundColor = "red";
           } else {
-            cell.style.backgroundColor = "black";
-          }
-        }
-      }
-      addHint();
-    }
-    //Adds the hint numbers
-    function addHint() {
-      document.getElementById("txt_0_2").placeholder = "1";
-      document.getElementById("txt_0_9").placeholder = "2";
-      document.getElementById("txt_0_11").placeholder = "3";
-      document.getElementById("txt_1_0").placeholder = "4";
-      document.getElementById("txt_3_2").placeholder = "5";
-      document.getElementById("txt_3_6").placeholder = "6";
-      document.getElementById("txt_3_11").placeholder = "7";
-      document.getElementById("txt_6_14").placeholder = "8";
-    }
-    //Stores ID of the selected cell into currentTextInput
-    function textInputFocus(txtID123) {
-      currentTextInput = txtID123;
-    }
-    //Returns Array
-    function preparePuzzelArray() {
-      var items = [
-        [0, 0, "q", 0, 0, 0, 0, 0, 0, "e", "p", "r", "o", "m", 0, 0],
-        ["c", "p", "u", 0, 0, 0, 0, 0, 0, 0, 0, "e", 0, 0, 0, 0],
-        [0, 0, "a", 0, 0, 0, 0, 0, 0, 0, 0, "g", 0, 0, 0, 0],
-        [0, 0, "d", "u", "a", "l", "c", "o", "r", "e", 0, "i", "5", 0, 0, 0],
-        [0, 0, "c", 0, 0, 0, "s", 0, 0, 0, 0, "s", 0, 0, 0, 0],
-        [0, 0, "o", 0, 0, 0, 0, 0, 0, 0, 0, "t", 0, 0, 0, 0],
-        [0, 0, "r", 0, 0, 0, 0, 0, 0, 0, 0, "r", 0, 0, "d", 0],
-        [0, "m", "e", "m", "o", "r", "i", "a", "d", "e", "m", "a", "s", "s", "a", 0],
-        [0, 0, 0, 0, 0, 0, "o", 0, 0, 0, 0, "d", 0, 0, "t", 0],
-        ["k", "a", "s", "h", "m", "i", "r", 0, 0, 0, 0, "o", 0, "r", "a", "m"],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "r", 0, 0, "b", 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "e", 0, 0, "u", 0],
-        [0, 0, 0, 0, 0, 0, "a", "d", "r", "e", "s", "s", "b", "u", "s", 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "l", 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "a", 0, 0],
-      ];
-      return items;
-    }
-    //Clear All Button
-    function clearAllClicked() {
-      currentTextInput = "";
-      var puzzelTable = document.getElementById("puzzel");
-      puzzelTable.innerHTML = "";
-      initializeScreen();
-    }
-    //Check button
-    function checkClicked() {
-      for (var i = 0; i < puzzelArrayData.length; i++) {
-        var rowData = puzzelArrayData[i];
-        for (var j = 0; j < rowData.length; j++) {
-          if (rowData[j] != 0) {
-            var selectedInputTextElement = document.getElementById(
-              "txt" + "_" + i + "_" + j
-            );
-            if (selectedInputTextElement.value != puzzelArrayData[i][j]) {
-              selectedInputTextElement.style.backgroundColor = "red";
-            } else {
-              selectedInputTextElement.style.backgroundColor = "#5DFF00";
-            }
+            selectedInputTextElement.style.backgroundColor = "#5DFF00";
           }
         }
       }
     }
-    //Clue Button
-    function clueClicked() {
-      if (currentTextInput != null) {
-        var temp1 = currentTextInput;
-        var token = temp1.split("_");
-        var row = token[1];
-        var column = token[2];
-        document.getElementById(temp1).value = puzzelArrayData[row][column];
-        //checkClicked();
+  }
+  //Clue Button
+  function clueClicked() {
+    if (currentTextInput != null) {
+      var temp1 = currentTextInput;
+      var token = temp1.split("_");
+      var row = token[1];
+      var column = token[2];
+      document.getElementById(temp1).value = puzzelArrayData[row][column];
+      //checkClicked();
+    }
+  }
+  //Solve Button
+  function solveClicked() {
+    if (currentTextInput != null) {
+      var temp1 = currentTextInput;
+      var token = temp1.split("_");
+      var row = token[1];
+      var column = token[2];
+
+      // Print elements on top
+      for (j = row; j >= 0; j--) {
+        if (puzzelArrayData[j][column] != 0) {
+          document.getElementById("txt" + "_" + j + "_" + column).value =
+            puzzelArrayData[j][column];
+        } else break;
+      }
+      // Print elements on right
+      for (i = column; i < puzzelArrayData[row].length; i++) {
+        if (puzzelArrayData[row][i] != 0) {
+          document.getElementById("txt" + "_" + row + "_" + i).value =
+            puzzelArrayData[row][i];
+        } else break;
+      }
+
+      // Print elements below
+      for (m = row; m < puzzelArrayData.length; m++) {
+        if (puzzelArrayData[m][column] != 0) {
+          document.getElementById("txt" + "_" + m + "_" + column).value =
+            puzzelArrayData[m][column];
+        } else break;
+      }
+      // Print elements on left
+      for (k = column; k >= 0; k--) {
+        if (puzzelArrayData[row][k] != 0) {
+          document.getElementById("txt" + "_" + row + "_" + k).value =
+            puzzelArrayData[row][k];
+        } else break;
+      }
+      // Done!
+    }
+  }
+</script>
+<script>
+  function palavra1() {
+    limpar()
+    document.getElementById("txt_0_2").style.backgroundColor = "lightblue";
+    document.getElementById("txt_1_2").style.backgroundColor = "lightblue";
+    document.getElementById("txt_2_2").style.backgroundColor = "lightblue";
+    document.getElementById("txt_3_2").style.backgroundColor = "lightblue";
+    document.getElementById("txt_4_2").style.backgroundColor = "lightblue";
+    document.getElementById("txt_5_2").style.backgroundColor = "lightblue";
+    document.getElementById("txt_6_2").style.backgroundColor = "lightblue";
+    document.getElementById("txt_7_2").style.backgroundColor = "lightblue";
+  }
+  function palavra2() {
+    limpar()
+    document.getElementById("txt_0_9").style.backgroundColor = "lightblue";
+    document.getElementById("txt_0_10").style.backgroundColor = "lightblue";
+    document.getElementById("txt_0_11").style.backgroundColor = "lightblue";
+    document.getElementById("txt_0_12").style.backgroundColor = "lightblue";
+    document.getElementById("txt_0_13").style.backgroundColor = "lightblue";
+  }
+  function palavra3() {
+    limpar()
+    document.getElementById("txt_0_11").style.backgroundColor = "lightblue";
+    document.getElementById("txt_1_11").style.backgroundColor = "lightblue";
+    document.getElementById("txt_2_11").style.backgroundColor = "lightblue";
+    document.getElementById("txt_3_11").style.backgroundColor = "lightblue";
+    document.getElementById("txt_4_11").style.backgroundColor = "lightblue";
+    document.getElementById("txt_5_11").style.backgroundColor = "lightblue";
+    document.getElementById("txt_6_11").style.backgroundColor = "lightblue";
+    document.getElementById("txt_7_11").style.backgroundColor = "lightblue";
+    document.getElementById("txt_8_11").style.backgroundColor = "lightblue";
+    document.getElementById("txt_9_11").style.backgroundColor = "lightblue";
+    document.getElementById("txt_10_11").style.backgroundColor = "lightblue";
+    document.getElementById("txt_11_11").style.backgroundColor = "lightblue";
+    document.getElementById("txt_12_11").style.backgroundColor = "lightblue";
+  }
+  function palavra4() {
+    limpar()
+    document.getElementById("txt_1_0").style.backgroundColor = "lightblue";
+    document.getElementById("txt_1_1").style.backgroundColor = "lightblue";
+    document.getElementById("txt_1_2").style.backgroundColor = "lightblue";
+  }
+  function palavra5() {
+    limpar()
+    document.getElementById("txt_3_2").style.backgroundColor = "lightblue";
+    document.getElementById("txt_3_3").style.backgroundColor = "lightblue";
+    document.getElementById("txt_3_4").style.backgroundColor = "lightblue";
+    document.getElementById("txt_3_5").style.backgroundColor = "lightblue";
+    document.getElementById("txt_3_6").style.backgroundColor = "lightblue";
+    document.getElementById("txt_3_7").style.backgroundColor = "lightblue";
+    document.getElementById("txt_3_8").style.backgroundColor = "lightblue";
+    document.getElementById("txt_3_9").style.backgroundColor = "lightblue";
+  }
+  function palavra6() {
+    limpar()
+    document.getElementById("txt_3_6").style.backgroundColor = "lightblue";
+    document.getElementById("txt_4_6").style.backgroundColor = "lightblue";
+  }
+  function palavra7() {
+    limpar()
+    document.getElementById("txt_3_11").style.backgroundColor = "lightblue";
+    document.getElementById("txt_3_12").style.backgroundColor = "lightblue";
+  }
+  function palavra8() {
+    limpar()
+    document.getElementById("txt_6_14").style.backgroundColor = "lightblue";
+    document.getElementById("txt_7_14").style.backgroundColor = "lightblue";
+    document.getElementById("txt_8_14").style.backgroundColor = "lightblue";
+    document.getElementById("txt_9_14").style.backgroundColor = "lightblue";
+    document.getElementById("txt_10_14").style.backgroundColor = "lightblue";
+    document.getElementById("txt_11_14").style.backgroundColor = "lightblue";
+    document.getElementById("txt_12_14").style.backgroundColor = "lightblue";
+  }
+  function palavra9() {
+    limpar()
+    document.getElementById("txt_7_1").style.backgroundColor = "lightblue";
+    document.getElementById("txt_7_2").style.backgroundColor = "lightblue";
+    document.getElementById("txt_7_3").style.backgroundColor = "lightblue";
+    document.getElementById("txt_7_4").style.backgroundColor = "lightblue";
+    document.getElementById("txt_7_5").style.backgroundColor = "lightblue";
+    document.getElementById("txt_7_6").style.backgroundColor = "lightblue";
+    document.getElementById("txt_7_7").style.backgroundColor = "lightblue";
+    document.getElementById("txt_7_8").style.backgroundColor = "lightblue";
+    document.getElementById("txt_7_9").style.backgroundColor = "lightblue";
+    document.getElementById("txt_7_10").style.backgroundColor = "lightblue";
+    document.getElementById("txt_7_11").style.backgroundColor = "lightblue";
+    document.getElementById("txt_7_12").style.backgroundColor = "lightblue";
+    document.getElementById("txt_7_13").style.backgroundColor = "lightblue";
+    document.getElementById("txt_7_14").style.backgroundColor = "lightblue";
+  }
+  function palavra10() {
+    limpar()
+    document.getElementById("txt_7_6").style.backgroundColor = "lightblue";
+    document.getElementById("txt_8_6").style.backgroundColor = "lightblue";
+  }
+  function palavra11() {
+    limpar()
+    document.getElementById("txt_7_8").style.backgroundColor = "lightblue";
+    document.getElementById("txt_8_8").style.backgroundColor = "lightblue";
+    document.getElementById("txt_9_8").style.backgroundColor = "lightblue";
+  }
+  function palavra12() {
+    limpar()
+    document.getElementById("txt_9_13").style.backgroundColor = "lightblue";
+    document.getElementById("txt_9_14").style.backgroundColor = "lightblue";
+    document.getElementById("txt_9_15").style.backgroundColor = "lightblue";
+  }
+  function palavra13() {
+    limpar()
+    document.getElementById("txt_10_6").style.backgroundColor = "lightblue";
+    document.getElementById("txt_11_6").style.backgroundColor = "lightblue";
+    document.getElementById("txt_12_6").style.backgroundColor = "lightblue";
+    document.getElementById("txt_13_6").style.backgroundColor = "lightblue";
+    document.getElementById("txt_14_6").style.backgroundColor = "lightblue";
+  }
+  function palavra14() {
+    limpar()
+    document.getElementById("txt_12_6").style.backgroundColor = "lightblue";
+    document.getElementById("txt_12_7").style.backgroundColor = "lightblue";
+    document.getElementById("txt_12_8").style.backgroundColor = "lightblue";
+    document.getElementById("txt_12_9").style.backgroundColor = "lightblue";
+    document.getElementById("txt_12_10").style.backgroundColor = "lightblue";
+    document.getElementById("txt_12_11").style.backgroundColor = "lightblue";
+    document.getElementById("txt_12_12").style.backgroundColor = "lightblue";
+    document.getElementById("txt_12_13").style.backgroundColor = "lightblue";
+    document.getElementById("txt_12_14").style.backgroundColor = "lightblue";
+  }
+  function palavra15() {
+    limpar()
+    document.getElementById("txt_12_8").style.backgroundColor = "lightblue";
+    document.getElementById("txt_13_8").style.backgroundColor = "lightblue";
+    document.getElementById("txt_14_8").style.backgroundColor = "lightblue";
+  }
+  function palavra16() {
+    limpar()
+    document.getElementById("txt_12_13").style.backgroundColor = "lightblue";
+    document.getElementById("txt_13_13").style.backgroundColor = "lightblue";
+    document.getElementById("txt_14_13").style.backgroundColor = "lightblue";
+  }
+</script>
+<script>
+  function limpar() {
+    for (var i = 0; i < puzzelArrayData.length; i++) {
+      var rowData = puzzelArrayData[i];
+      for (var j = 0; j < rowData.length; j++) {
+        if (rowData[j] != 0) {
+          var selectedInputTextElement = document.getElementById(
+            "txt" + "_" + i + "_" + j
+          );
+          selectedInputTextElement.style.backgroundColor = "white"
+        }
       }
     }
-    //Solve Button
-    function solveClicked() {
-      if (currentTextInput != null) {
-        var temp1 = currentTextInput;
-        var token = temp1.split("_");
-        var row = token[1];
-        var column = token[2];
-
-        // Print elements on top
-        for (j = row; j >= 0; j--) {
-          if (puzzelArrayData[j][column] != 0) {
-            document.getElementById("txt" + "_" + j + "_" + column).value =
-              puzzelArrayData[j][column];
-          } else break;
-        }
-        // Print elements on right
-        for (i = column; i < puzzelArrayData[row].length; i++) {
-          if (puzzelArrayData[row][i] != 0) {
-            document.getElementById("txt" + "_" + row + "_" + i).value =
-              puzzelArrayData[row][i];
-          } else break;
-        }
-
-        // Print elements below
-        for (m = row; m < puzzelArrayData.length; m++) {
-          if (puzzelArrayData[m][column] != 0) {
-            document.getElementById("txt" + "_" + m + "_" + column).value =
-              puzzelArrayData[m][column];
-          } else break;
-        }
-        // Print elements on left
-        for (k = column; k >= 0; k--) {
-          if (puzzelArrayData[row][k] != 0) {
-            document.getElementById("txt" + "_" + row + "_" + k).value =
-              puzzelArrayData[row][k];
-          } else break;
-        }
-        // Done!
-      }
-    }
-  </script>
+  }
+</script>
